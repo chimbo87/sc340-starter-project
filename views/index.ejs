@@ -1,1 +1,73 @@
-<h1>Archford</h1>
+<% if (title) { %>
+    <h1><%= title %></h1>
+  <% } else { %>
+    <h1>Welcome to CSE Motors!</h1>
+  <% } %>
+  
+  <div class="hero-container">
+    <div class="hero-content">
+      <h2>DMC Delorean</h2>
+      <ul class="features-list">
+        <li>3 Cup holders</li>
+        <li>Superman doors</li>
+        <li>Fuzzy dice!</li>
+      </ul>
+      <a href="/inventory/own" class="cta-button">Own Today</a>
+    </div>
+    <div class="hero-image">
+      <img src="/images/vehicles/delorean.jpg" alt="DMC Delorean">
+    </div>
+  </div>
+  
+  <div class="content-grid">
+    <div class="upgrades-section">
+      <h2>Delorean Upgrades</h2>
+      <div class="upgrades-grid">
+        <div class="upgrade-item">
+          <div class="upgrade-image">
+            <img src="/images/upgrades/flux-cap.png" alt="Flux Capacitor">
+          </div>
+          <a href="/inventory/upgrade/flux">Flux Capacitor</a>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-image">
+            <img src="/images/upgrades/flame.jpg" alt="Flame Decals">
+          </div>
+          <a href="/inventory/upgrade/flame">Flame Decals</a>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-image">
+            <img src="/images/upgrades/bumper_sticker.jpg" alt="Bumper Stickers">
+          </div>
+          <a href="/inventory/upgrade/bumper">Bumper Stickers</a>
+        </div>
+        <div class="upgrade-item">
+          <div class="upgrade-image">
+            <img src="/images/upgrades/hub-cap.jpg" alt="Hub Caps">
+          </div>
+          <a href="/inventory/upgrade/hub">Hub Caps</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="reviews-section">
+      <h2>DMC Delorean Reviews</h2>
+      <ul class="review-list">
+        <li>
+          <p>"So fast it's almost like traveling in time." <span class="rating">(4/5)</span></p>
+        </li>
+        <li>
+          <p>"Coolest ride on the road." <span class="rating">(4/5)</span></p>
+        </li>
+        <li>
+          <p>"I'm feeling McFly!" <span class="rating">(5/5)</span></p>
+        </li>
+        <li>
+          <p>"The most futuristic ride of our day." <span class="rating">(4.5/5)</span></p>
+        </li>
+        <li>
+          <p>"80's livin and I love it!" <span class="rating">(5/5)</span></p>
+        </li>
+      </ul>
+    </div>
+  </div>
