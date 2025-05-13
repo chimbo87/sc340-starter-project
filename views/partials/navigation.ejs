@@ -1,35 +1,33 @@
 <nav id="page-nav">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/custom">Custom</a></li>
-      <li><a href="/sedan">Sedan</a></li>
-      <li><a href="/suv">SUV</a></li>
-      <li><a href="/truck">Truck</a></li>
-    </ul>
-    <div class="hamburger">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </div>
-  </nav>
-  
-  <script>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/custom">Custom</a></li>
+    <li><a href="/sedan">Sedan</a></li>
+    <li><a href="/suv">SUV</a></li>
+    <li><a href="/truck">Truck</a></li>
+  </ul>
+  <div class="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+</nav>
 
-    document.addEventListener('DOMContentLoaded', function() {
-      const hamburger = document.querySelector('.hamburger');
-      const navMenu = document.querySelector('#page-nav ul');
-      
-      hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-      });
-      
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('#page-nav ul');
     
-      document.querySelectorAll('#page-nav a').forEach(link => 
-        link.addEventListener('click', () => {
-          hamburger.classList.remove('active');
-          navMenu.classList.remove('active');
-        })
-      );
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
     });
-  </script>
+    
+    document.querySelectorAll('#page-nav a').forEach(link => 
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+      })
+    );
+  });
+</script>
