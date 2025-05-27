@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title || 'Default Title' %></title>
+  <link rel="stylesheet" href="/css/style.css">
   <%- include('../partials/head') %>
-  <body>
-    <div id="wrapper">
-      <%- include('../partials/header') %> 
-      <%- include('../partials/navigation')
-      %>
-      <main>
-        <%- body %>
-      </main>
+</head>
+<body>
+  <%- include('../partials/header') %>
+  <%- include('../partials/navigation') %>
+  
+  <main class="container">
+    <%- body %>
+  </main>
 
-      <%- include('../partials/footer')%>
-    </div>
-  </body>
+  <%- include('../partials/footer') %>
+  <script src="/js/script.js"></script>
+</body>
 </html>

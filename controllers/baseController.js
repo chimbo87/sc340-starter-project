@@ -1,14 +1,15 @@
-const utilities = require("../utilities")
-const baseController = {}
+const utilities = require("../utilities");
 
-baseController.buildHome = async function (req, res) {
+exports.buildHome = async function(req, res) {
   try {
-    const nav = await utilities.getNav(); // Now matches updated function
-    res.render("index", { title: "Home", nav });
+    const nav = await utilities.getNav();
+    res.render("index", {
+      title: "Home",
+      nav,
+      errors: null,
+    });
   } catch (error) {
-    console.error("buildHome error:", error);
+    console.error("Error building home view:", error);
     res.status(500).send("Internal Server Error");
   }
 };
-
-module.exports = baseController
