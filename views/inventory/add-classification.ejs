@@ -1,0 +1,31 @@
+<!-- views/inventory/add-classification.ejs -->
+
+
+<main>
+    <h1>Add New Classification</h1>
+    
+    <% if (message) { %>
+        <div class="flash-message"><%= message %></div>
+    <% } %>
+
+    <% if (errors) { %>
+        <div class="errors">
+            <ul>
+                <% errors.forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } %>
+
+    <form action="/inv/add-classification" method="post" id="classificationForm">
+        <label for="classification_name">Classification Name:</label>
+        <input type="text" name="classification_name" id="classification_name" 
+               required pattern="^[a-zA-Z0-9]+$" 
+               title="No spaces or special characters allowed">
+        <p class="instruction">Note: Classification name cannot contain spaces or special characters</p>
+        
+        <button type="submit">Add Classification</button>
+    </form>
+</main>
+

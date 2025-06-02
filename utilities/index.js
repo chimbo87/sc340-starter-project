@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model");
-const Util = {}
+
+const Util = {};
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -25,21 +26,39 @@ Util.getNav = async function () {
 };
 
 /* ************************
+ * Build classification select list
+ ************************** */
+Util.buildClassificationList = async function (classification_id = null) {
+    let data = await invModel.getClassifications();
+    let classificationList = 
+        '<select name="classification_id" id="classificationList" required>';
+    classificationList += "<option value=''>Choose a Classification</option>";
+    data.rows.forEach((row) => {
+        classificationList += '<option value="' + row.classification_id + '"';
+        if (classification_id != null && row.classification_id == classification_id) {
+            classificationList += " selected ";
+        }
+        classificationList += ">" + row.classification_name + "</option>";
+    });
+    classificationList += "</select>";
+    return classificationList;
+};
+
+/* ************************
  * Build vehicle cards HTML
  ************************** */
-
 Util.buildVehicleCards = async function (vehicles) {
   let grid = '<div class="inventory-section"><h2>Our Vehicles</h2></div>';
   grid += '<div class="vehicle-grid">';
   
-  if (vehicles.length === 0) {
+  if (!vehicles || vehicles.length === 0) {
     grid += '<p>No vehicles found in this classification.</p>';
   } else {
     vehicles.forEach(vehicle => {
       grid += `
         <div class="vehicle-card">
           <a href="/inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
-       <img src="${vehicle.inv_thumbnail}" alt="${vehicle.inv_make} ${vehicle.inv_model}">
+            <img src="${vehicle.inv_thumbnail}" alt="${vehicle.inv_make} ${vehicle.inv_model}">
             <div class="vehicle-info">
               <h3>${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}</h3>
               <p class="price">$${new Intl.NumberFormat().format(vehicle.inv_price)}</p>
@@ -52,32 +71,6 @@ Util.buildVehicleCards = async function (vehicles) {
   
   grid += '</div>';
   return grid;
-};
-
-/* ************************
- * Build vehicle detail HTML
- ************************** */
-Util.buildVehicleDetail = async function (vehicle) {
-  return `
-    <div class="vehicle-detail">
-<img src="${vehicle.inv_thumbnail}" alt="${vehicle.inv_make} ${vehicle.inv_model}">
-      
-      <div class="detail-info">
-        <h2>${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}</h2>
-        <p class="price">$${new Intl.NumberFormat().format(vehicle.inv_price)}</p>
-        
-        <div class="specs">
-          <p><strong>Mileage:</strong> ${new Intl.NumberFormat().format(vehicle.inv_miles)} miles</p>
-          <p><strong>Color:</strong> ${vehicle.inv_color}</p>
-        </div>
-        
-        <div class="description">
-          <h3>Description</h3>
-          <p>${vehicle.inv_description}</p>
-        </div>
-      </div>
-    </div>
-  `;
 };
 
 /* ************************
