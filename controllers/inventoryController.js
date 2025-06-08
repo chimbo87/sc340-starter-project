@@ -104,9 +104,25 @@ async function buildAddClassification(req, res, next) {
 /* ************************
  * Process add classification
  ************************** */
+/* ************************
+ * Process add classification
+ ************************** */
 async function addClassification(req, res, next) {
   try {
     const { classification_name } = req.body;
+    
+    // Validation - check if classification_name is provided
+    if (!classification_name) {
+      req.flash('message', 'Classification name is required');
+      return res.redirect('/inv/add-classification');
+    }
+    
+    // Check if classification already exists
+    const existingClassification = await invModel.getClassificationByName(classification_name);
+    if (existingClassification) {
+      req.flash('message', 'Classification already exists');
+      return res.redirect('/inv/add-classification');
+    }
     
     // Insert into database
     await invModel.addClassification(classification_name);
@@ -114,14 +130,15 @@ async function addClassification(req, res, next) {
     // Rebuild navigation with new classification
     const nav = await utilities.getNav();
     
-    req.flash('message', 'Classification added successfully!');
-    res.redirect('/inv/');
+    req.flash('message', `Classification "${classification_name}" added successfully!`);
+    res.redirect('/inv/add-classification');
   } catch (error) {
+    console.error('Error adding classification:', error);
     req.flash('message', 'Failed to add classification');
     res.render('inventory/add-classification', {
       title: 'Add New Classification',
       message: req.flash('message'),
-      errors: [{ msg: 'Database error occurred' }]
+      errors: [{ msg: error.message || 'Database error occurred' }]
     });
   }
 }
@@ -160,6 +177,9 @@ async function buildAddInventory(req, res, next) {
 /* ************************
  * Process add inventory
  ************************** */
+/* ************************
+ * Process add inventory
+ ************************** */
 async function addInventory(req, res, next) {
   try {
     const {
@@ -174,33 +194,43 @@ async function addInventory(req, res, next) {
       inv_miles,
       inv_color
     } = req.body;
-    
-    // Insert into database
-    await invModel.addInventory({
+
+    // Basic validation
+    if (!classification_id) {
+      req.flash('message', 'Please select a classification');
+      return res.redirect('/inv/add-inventory');
+    }
+
+    // Create inventory data object
+    const invData = {
       classification_id,
       inv_make,
       inv_model,
       inv_year,
       inv_description,
-      inv_image,
-      inv_thumbnail,
+      inv_image: inv_image || '/images/vehicles/no-image.png',
+      inv_thumbnail: inv_thumbnail || '/images/vehicles/no-image-tn.png',
       inv_price,
       inv_miles,
       inv_color
-    });
+    };
+
+    // Insert into database
+    const result = await invModel.addInventory(invData);
     
-    req.flash('message', 'Inventory added successfully!');
-    res.redirect('/inv/');
+    req.flash('message', `Inventory item "${inv_make} ${inv_model}" added successfully!`);
+    res.redirect('/inv/add-inventory');
   } catch (error) {
-    console.error(error);
+    console.error('Error adding inventory:', error);
+    
     const classificationList = await utilities.buildClassificationList(req.body.classification_id);
     
-    req.flash('message', 'Failed to add inventory');
+    req.flash('message', 'Failed to add inventory item');
     res.render('inventory/add-inventory', {
       title: 'Add New Inventory',
       classificationList,
       message: req.flash('message'),
-      errors: [{ msg: 'Database error occurred' }],
+      errors: [{ msg: error.message || 'Database error occurred' }],
       formData: req.body
     });
   }

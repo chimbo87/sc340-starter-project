@@ -1,9 +1,10 @@
-
 <main>
     <h1>Add New Inventory</h1>
     
     <% if (message) { %>
-        <div class="flash-message"><%= message %></div>
+        <div class="flash-message <%= message.includes('successfully') ? 'success' : 'error' %>">
+            <%= message %>
+        </div>
     <% } %>
 
     <% if (errors && errors.length > 0) { %>
@@ -75,7 +76,24 @@
                    value="<%= locals.formData ? locals.formData.inv_color : '' %>">
         </div>
 
-        <button type="submit">Add Inventory</button>
+        <button type="submit" id="submitBtn">
+            <span id="buttonText">Add Inventory</span>
+            <span id="spinner" class="spinner hidden"></span>
+        </button>
     </form>
 </main>
 
+
+
+<script>
+    document.getElementById('inventoryForm').addEventListener('submit', function(e) {
+        const submitBtn = document.getElementById('submitBtn');
+        const buttonText = document.getElementById('buttonText');
+        const spinner = document.getElementById('spinner');
+        
+        submitBtn.disabled = true;
+        buttonText.textContent = 'Processing...';
+        spinner.classList.remove('hidden');
+        
+    });
+</script>

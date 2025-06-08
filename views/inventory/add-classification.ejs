@@ -1,11 +1,8 @@
-<!-- views/inventory/add-classification.ejs -->
-
-
 <main>
     <h1>Add New Classification</h1>
     
     <% if (message) { %>
-        <div class="flash-message"><%= message %></div>
+        <div class="flash-message success"><%= message %></div>
     <% } %>
 
     <% if (errors) { %>
@@ -25,7 +22,24 @@
                title="No spaces or special characters allowed">
         <p class="instruction">Note: Classification name cannot contain spaces or special characters</p>
         
-        <button type="submit">Add Classification</button>
+        <button type="submit" id="submitBtn">
+            <span id="buttonText">Add Classification</span>
+            <span id="spinner" class="spinner hidden"></span>
+        </button>
     </form>
 </main>
 
+
+
+<script>
+    document.getElementById('classificationForm').addEventListener('submit', function(e) {
+        const submitBtn = document.getElementById('submitBtn');
+        const buttonText = document.getElementById('buttonText');
+        const spinner = document.getElementById('spinner');
+        
+       
+        submitBtn.disabled = true;
+        buttonText.textContent = 'Processing...';
+        spinner.classList.remove('hidden');
+    });
+</script>
