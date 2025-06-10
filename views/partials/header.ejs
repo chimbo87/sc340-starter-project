@@ -3,6 +3,16 @@
     <h1><a href="/">CSE Motors</a></h1>
   </div>
   <div class="tools">
-    <a href="/account" class="account-link">My Account</a>
+    <% if (locals.accountData) { %>
+      <!-- Welcome link with user's first name -->
+      <a href="/account/" class="nav-link">Welcome <%= accountData.account_firstname %></a>
+      <% if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') { %>
+        <a href="/inv/" class="nav-link">Inventory</a>
+      <% } %>
+      <a href="/account/logout" class="nav-link">Logout</a>
+    <% } else { %>
+      <!-- My Account link for non-logged in users -->
+      <a href="/account/login" class="nav-link">My Account</a>
+    <% } %>
   </div>
 </header>

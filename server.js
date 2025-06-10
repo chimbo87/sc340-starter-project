@@ -1,7 +1,4 @@
-/* ******************************************
- * This server.js file is the primary file of the 
- * application. It is used to control the project.
- *******************************************/
+
 /* ***********************
  * Require Statements
  *************************/
@@ -11,13 +8,16 @@ const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config();
 const app = express();
 const static = require("./routes/static");
-const inventoryRoute = require("./routes/inventoryRoute"); // Fixed: Using correct inventory route file
+const inventoryRoute = require("./routes/inventoryRoute");
+const accountRoute = require("./routes/accountRoute");
 const path = require("path");
 const session = require("express-session");
 const flash = require("connect-flash");
+const cookieParser = require("cookie-parser");
+const utilities = require("./utilities");
 
 /* ***********************
- * View Engine and Templates (moved before middleware)
+ * View Engine and Templates
  *************************/
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views")); 
@@ -27,9 +27,12 @@ app.set("layout", "./layouts/layout");
 /* ***********************
  * Middleware
  *************************/
-// Static files (moved to top of middleware)
+// Static files
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/images', express.static('images'));
+
+// Cookie parser middleware
+app.use(cookieParser());
 
 // Session configuration
 app.use(session({
@@ -45,35 +48,44 @@ app.use(session({
 // Flash messages middleware
 app.use(flash());
 
-// Make flash messages available to all views
+// Make flash messages and utilities available to all views
 app.use((req, res, next) => {
   res.locals.messages = req.flash();
   next();
 });
+
+// JWT checking middleware (only in production)
+if (process.env.NODE_ENV === 'production') {
+  app.use(utilities.checkJWTToken);
+}
 
 // Body parsing middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 /* ***********************
- * Routes (Order matters!)
+ * Routes
  *************************/
-// Home route (should be first and most specific)
-app.get("/", baseController.buildHome);
+// Home route
+app.get("/", utilities.handleErrors(baseController.buildHome));
+
+// Account routes
+app.use("/account", accountRoute);
 
 // Inventory routes
 app.use("/inv", inventoryRoute);
 
-// Other static routes (if needed)
+// Static routes
 app.use(static);
 
 /* ***********************
- * 404 Error Handler (should be after all routes)
+ * 404 Error Handler
  *************************/
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
+  const nav = await utilities.getNav();
   res.status(404).render('errors/error', {
     title: '404 - Page Not Found',
-    nav: require('./utilities').getNav(),
+    nav,
     message: 'Sorry, the page you are looking for does not exist.'
   });
 });
@@ -81,11 +93,12 @@ app.use((req, res, next) => {
 /* ***********************
  * Error Handling Middleware
  *************************/
-app.use((err, req, res, next) => {
+app.use(async (err, req, res, next) => {
   console.error(err.stack);
+  const nav = await utilities.getNav();
   res.status(500).render('errors/error', {
     title: 'Server Error',
-    nav: require('./utilities').getNav(),
+    nav,
     errors: { msg: err.message }
   });
 });
@@ -103,5 +116,6 @@ const host = process.env.HOST || "localhost";
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`);
   console.log(`Home page: http://${host}:${port}/`);
+  console.log(`Account management: http://${host}:${port}/account/`);
   console.log(`Inventory management: http://${host}:${port}/inv/`);
 });

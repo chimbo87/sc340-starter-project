@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model");
+const jwt = require('jsonwebtoken');
 
 const Util = {};
 
@@ -74,6 +75,41 @@ Util.buildVehicleCards = async function (vehicles) {
 };
 
 /* ************************
+ * JWT Token Verification Middleware
+ ************************** */
+Util.checkJWTToken = async (req, res, next) => {
+  if (process.env.NODE_ENV === 'development') {
+    // For development, mock a logged-in user if needed
+    // Remove this in production!
+    if (!req.cookies.jwt) {
+      const mockAccount = await invModel.getAccountById(1); // Get a test account
+      if (mockAccount) {
+        delete mockAccount.account_password;
+        const token = jwt.sign(mockAccount, process.env.ACCESS_TOKEN_SECRET);
+        res.cookie("jwt", token, { httpOnly: true });
+      }
+    }
+    return next();
+  }
+
+  const token = req.cookies.jwt;
+  
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      req.accountData = decoded;
+      res.locals.accountData = decoded;
+      next();
+    } catch (error) {
+      res.clearCookie('jwt');
+      return res.redirect('/account/login');
+    }
+  } else {
+    next();
+  }
+};
+
+/* ************************
  * Error handling utilities
  ************************** */
 Util.handleError = function(res, error) {
@@ -84,7 +120,21 @@ Util.handleError = function(res, error) {
     errors: { msg: error.message },
   });
 };
-
+Util.checkAccountType = (requiredTypes) => {
+  return (req, res, next) => {
+    if (!req.accountData) {
+      req.flash('notice', 'Please log in to access this page.');
+      return res.redirect('/account/login');
+    }
+    
+    if (!requiredTypes.includes(req.accountData.account_type)) {
+      req.flash('notice', 'You do not have permission to access this page.');
+      return res.redirect('/account/');
+    }
+    
+    next();
+  };
+};
 Util.handleErrors = function(fn) {
   return function(req, res, next) {
     fn(req, res, next).catch(err => {
