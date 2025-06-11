@@ -1,103 +1,168 @@
 <div class="vehicle-detail-container">
-    <div class="certification-banner">
-      <p>This vehicle has passed inspection by an ASE-certified technician.</p>
-      <div class="enterprise-certified">enterprise certified®</div>
-    </div>
-  
-    <div class="vehicle-content">
-      <!-- Left Column -->
-      <div class="left-column">
-        <div class="vehicle-gallery">
-            <img src="<%= vehicle.inv_image %>" 
-                 alt="<%= vehicle.inv_make %> <%= vehicle.inv_model %>" 
-                 class="main-image"
-                 onerror="this.src='/images/no-image.png'; this.onerror=null;">
-            
-            <div class="thumbnail-gallery">
-              <img src="<%= vehicle.inv_thumbnail %>" class="thumbnail active"
-                   onerror="this.style.display='none';">
-            </div>
+  <div class="certification-banner">
+    <p>This vehicle has passed inspection by an ASE-certified technician.</p>
+    <div class="enterprise-certified">enterprise certified®</div>
+  </div>
+
+  <div class="vehicle-content">
+    <!-- Left Column -->
+    <div class="left-column">
+      <div class="vehicle-gallery">
+          <img src="<%= vehicle.inv_image %>" 
+               alt="<%= vehicle.inv_make %> <%= vehicle.inv_model %>" 
+               class="main-image"
+               onerror="this.src='/images/no-image.png'; this.onerror=null;">
+          
+          <div class="thumbnail-gallery">
+            <img src="<%= vehicle.inv_thumbnail %>" class="thumbnail active"
+                 onerror="this.style.display='none';">
           </div>
-  
-        <div class="vehicle-specs">
-          <h3 class="specs-title">Vehicle Details</h3>
-          <div class="specs-grid">
-            <div class="spec-item">
-              <span class="spec-label">Mileage</span>
-              <span class="spec-value"><%= new Intl.NumberFormat().format(vehicle.inv_miles) %></span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Ext. Color</span>
-              <span class="spec-value"><%= vehicle.inv_color %></span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Int. Color</span>
-              <span class="spec-value">Black</span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Year</span>
-              <span class="spec-value"><%= vehicle.inv_year %></span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Make</span>
-              <span class="spec-value"><%= vehicle.inv_make %></span>
-            </div>
-            <div class="spec-item">
-              <span class="spec-label">Model</span>
-              <span class="spec-value"><%= vehicle.inv_model %></span>
-            </div>
-            <% if (vehicle.inv_description) { %>
-            <div class="spec-item" style="grid-column: 1 / -1;">
-              <span class="spec-label">Description</span>
-              <span class="spec-value"><%= vehicle.inv_description %></span>
-            </div>
-            <% } %>
+        </div>
+
+      <div class="vehicle-specs">
+        <h3 class="specs-title">Vehicle Details</h3>
+        <div class="specs-grid">
+          <div class="spec-item">
+            <span class="spec-label">Mileage</span>
+            <span class="spec-value"><%= new Intl.NumberFormat().format(vehicle.inv_miles) %></span>
           </div>
-  
-          <div class="vehicle-history">
-            <p>The principal prior use of this vehicle was as a Rental Vehicle.</p>
+          <div class="spec-item">
+            <span class="spec-label">Ext. Color</span>
+            <span class="spec-value"><%= vehicle.inv_color %></span>
           </div>
+          <div class="spec-item">
+            <span class="spec-label">Int. Color</span>
+            <span class="spec-value">Black</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Year</span>
+            <span class="spec-value"><%= vehicle.inv_year %></span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Make</span>
+            <span class="spec-value"><%= vehicle.inv_make %></span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Model</span>
+            <span class="spec-value"><%= vehicle.inv_model %></span>
+          </div>
+          <% if (vehicle.inv_description) { %>
+          <div class="spec-item" style="grid-column: 1 / -1;">
+            <span class="spec-label">Description</span>
+            <span class="spec-value"><%= vehicle.inv_description %></span>
+          </div>
+          <% } %>
+        </div>
+
+        <div class="vehicle-history">
+          <p>The principal prior use of this vehicle was as a Rental Vehicle.</p>
         </div>
       </div>
-  
-      <!-- Right Column -->
-      <div class="right-column">
-        <div class="vehicle-header">
-          <h1><%= vehicle.inv_year %> <%= vehicle.inv_make %> <%= vehicle.inv_model %></h1>
-        </div>
-  
-        <div class="price-section">
-          <p class="price-label">No-Haggle Price¹</p>
-          <p class="price">$<%= new Intl.NumberFormat().format(vehicle.inv_price) %></p>
-          
-          <div class="mileage-info">
-            <div>
-              <div class="mileage-label">Mileage</div>
-              <div class="mileage-value"><%= new Intl.NumberFormat().format(vehicle.inv_miles) %></div>
-            </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="right-column">
+      <div class="vehicle-header">
+        <h1><%= vehicle.inv_year %> <%= vehicle.inv_make %> <%= vehicle.inv_model %></h1>
+        <!-- Added Rating Display -->
+        <% if (typeof averageRating !== 'undefined' && averageRating > 0) { %>
+          <div class="vehicle-rating">
+            <span class="stars">
+              <% for (let i = 1; i <= 5; i++) { %>
+                <%= i <= Math.round(averageRating) ? '★' : '☆' %>
+              <% } %>
+            </span>
+            <span class="rating-text">
+              <%= typeof averageRating === 'number' ? averageRating.toFixed(1) : '0.0' %> 
+              (<a href="/reviews/list/<%= vehicle.inv_id %>">see reviews</a>)
+            </span>
           </div>
-          
-          <p class="disclaimer">Does not include $219 Dealer Documentary Service Fee.</p>
-          <a href="#" class="estimate-link">Estimate Payments</a>
-        </div>
-  
-        <div class="action-buttons">
-          <a href="/contact" class="btn btn-primary">Start My Purchase</a>
-          <a href="/contact" class="btn btn-secondary">Contact Us</a>
-          <a href="/test-drive" class="btn btn-secondary">Schedule Test Drive</a>
-          <a href="/financing" class="btn btn-outline">Apply for Financing</a>
-        </div>
-  
-        <div class="dealer-info">
-          <div class="contact-item">
-            <div class="contact-label">Call Us</div>
-            <div class="contact-value">801-396-7886</div>
+        <% } %>
+      </div>
+
+      <div class="price-section">
+        <p class="price-label">No-Haggle Price¹</p>
+        <p class="price">$<%= new Intl.NumberFormat().format(vehicle.inv_price) %></p>
+        
+        <div class="mileage-info">
+          <div>
+            <div class="mileage-label">Mileage</div>
+            <div class="mileage-value"><%= new Intl.NumberFormat().format(vehicle.inv_miles) %></div>
           </div>
-          <div class="contact-item">
-            <div class="contact-label">Visit Us</div>
-            <div class="contact-value">1234 Auto Mall, Anytown, USA</div>
-          </div>
+        </div>
+        
+        <p class="disclaimer">Does not include $219 Dealer Documentary Service Fee.</p>
+        <a href="#" class="estimate-link">Estimate Payments</a>
+      </div>
+
+      <div class="action-buttons">
+        <a href="/contact" class="btn btn-primary">Start My Purchase</a>
+        <a href="/contact" class="btn btn-secondary">Contact Us</a>
+        <a href="/test-drive" class="btn btn-secondary">Schedule Test Drive</a>
+        <a href="/financing" class="btn btn-outline">Apply for Financing</a>
+        <!-- Added Review Button -->
+        <% if (locals.loggedin) { %>
+          <a href="/reviews/add/<%= vehicle.inv_id %>" class="btn btn-review">Write a Review</a>
+        <% } else { %>
+          <a href="/account/login?redirect=/reviews/add/<%= vehicle.inv_id %>" class="btn btn-review">Login to Review</a>
+        <% } %>
+      </div>
+
+      <div class="dealer-info">
+        <div class="contact-item">
+          <div class="contact-label">Call Us</div>
+          <div class="contact-value">801-396-7886</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Visit Us</div>
+          <div class="contact-value">1234 Auto Mall, Anytown, USA</div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Reviews Preview Section -->
+<!-- Reviews Section -->
+<div class="reviews-section">
+  <h2>Customer Reviews</h2>
+  
+  <% if (reviews && reviews.length > 0) { %>
+    <div class="average-rating">
+      <span class="stars">
+        <% for (let i = 1; i <= 5; i++) { %>
+          <%= i <= Math.round(averageRating) ? '★' : '☆' %>
+        <% } %>
+      </span>
+      <span><%= averageRating.toFixed(1) %> out of 5 (<%= reviews.length %> reviews)</span>
+    </div>
+
+    <div class="review-list">
+      <% reviews.forEach(review => { %>
+        <div class="review-item">
+          <div class="review-header">
+            <span class="reviewer-name"><%= review.account_firstname %> <%= review.account_lastname %></span>
+            <span class="review-rating">
+              <% for (let i = 1; i <= 5; i++) { %>
+                <%= i <= review.rating ? '★' : '☆' %>
+              <% } %>
+            </span>
+          </div>
+          <div class="review-date">
+            <%= new Date(review.review_date).toLocaleDateString() %>
+          </div>
+          <div class="review-text"><%= review.review_text %></div>
+        </div>
+      <% }); %>
+    </div>
+  <% } else { %>
+    <p class="no-reviews">No reviews yet. Be the first to review this vehicle!</p>
+  <% } %>
+
+  <% if (loggedin) { %>
+    <a href="/reviews/add/<%= vehicle.inv_id %>" class="btn btn-primary">Write a Review</a>
+  <% } else { %>
+    <a href="/account/login?redirect=/reviews/add/<%= vehicle.inv_id %>" class="btn btn-primary">Login to Review</a>
+  <% } %>
+</div>
+</div>
+

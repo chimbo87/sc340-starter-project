@@ -1,5 +1,6 @@
 const utilities = require("../utilities");
 const invModel = require("../models/inventory-model");
+const reviewModel = require('../models/review-model');
 
 /* ************************
  * Build inventory by classification view
@@ -23,24 +24,36 @@ async function buildByClassificationId(req, res, next) {
  * Build vehicle detail view
  ************************** */
 async function buildByInventoryId(req, res, next) {
-  const inv_id = req.params.invId;
-  const data = await invModel.getVehicleById(inv_id);
-  const nav = await utilities.getNav();
-  
-  if (!data) {
-    return res.status(404).render("errors/error", {
-      title: "Vehicle Not Found",
+  try {
+    const inv_id = req.params.invId;
+    const vehicle = await invModel.getVehicleById(inv_id);
+    const nav = await utilities.getNav();
+    
+    if (!vehicle) {
+      return res.status(404).render("errors/error", {
+        title: "Vehicle Not Found",
+        nav,
+        errors: { msg: "The requested vehicle could not be found." },
+      });
+    }
+    
+    // Get reviews and average rating
+    const reviews = await reviewModel.getReviewsByVehicle(inv_id);
+let averageRating = await reviewModel.getAverageRating(inv_id);
+averageRating = parseFloat(averageRating) || 0; 
+    
+    res.render("inventory/detail", {
+      title: `${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}`,
       nav,
-      errors: { msg: "The requested vehicle could not be found." },
+      vehicle,
+      reviews, 
+      averageRating, 
+      loggedin: res.locals.loggedin || false,
+      errors: null,
     });
+  } catch (error) {
+    next(error);
   }
-  
-  res.render("inventory/detail", {
-    title: `${data.inv_year} ${data.inv_make} ${data.inv_model}`,
-    nav,
-    vehicle: data, 
-    errors: null,
-  });
 }
 
 /* ************************
@@ -177,9 +190,7 @@ async function buildAddInventory(req, res, next) {
 /* ************************
  * Process add inventory
  ************************** */
-/* ************************
- * Process add inventory
- ************************** */
+
 async function addInventory(req, res, next) {
   try {
     const {

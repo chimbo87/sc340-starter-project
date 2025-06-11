@@ -1,0 +1,31 @@
+<div class="vehicle-review-container">
+    <h1 class="vehicle-review-title">Add Review for Vehicle</h1>
+    <% if (locals.notice) { %>
+      <p class="vehicle-review-notice"><%= notice %></p>
+    <% } %>
+  
+    <form class="vehicle-review-form" action="/reviews/add" method="post">
+      <input type="hidden" name="inv_id" value="<%= inv_id %>">
+  
+      <div class="vehicle-review-form-group">
+        <label class="vehicle-review-label" for="rating">Rating (1-5 stars):</label>
+        <select class="vehicle-review-select" id="rating" name="rating" required>
+          <option value="1">1 Star</option>
+          <option value="2">2 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="5" selected>5 Stars</option>
+        </select>
+      </div>
+  
+      <div class="vehicle-review-form-group">
+        <label class="vehicle-review-label" for="review_text">Your Review:</label>
+        <textarea class="vehicle-review-textarea" id="review_text" name="review_text" rows="5" required></textarea>
+      </div>
+  
+      <div class="vehicle-review-button-group">
+        <button type="submit" class="vehicle-review-submit-btn">Submit Review</button>
+        <a href="/inv/detail/<%= inv_id %>" class="vehicle-review-cancel-btn">Cancel</a>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,37 @@
+<%- include('../layouts/header') %>
+
+<div class="container">
+  <h1>Reviews for This Vehicle</h1>
+  
+  <div class="average-rating mb-4">
+    <h3>Average Rating: <%= averageRating.toFixed(1) %>/5</h3>
+  </div>
+
+  <% if (reviews.length > 0) { %>
+    <div class="reviews-list">
+      <% reviews.forEach(review => { %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= review.account_firstname %> <%= review.account_lastname %>
+              <span class="text-warning">
+                <% for (let i = 0; i < review.rating; i++) { %>★<% } %>
+              </span>
+            </h5>
+            <p class="card-text"><%= review.review_text %></p>
+            <p class="text-muted">
+              <small>Reviewed on: <%= new Date(review.review_date).toLocaleDateString() %></small>
+            </p>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  <% } else { %>
+    <p>No reviews yet. Be the first to review!</p>
+  <% } %>
+
+  <a href="/reviews/add/<%= inv_id %>" class="btn btn-primary">Add Your Review</a>
+  <a href="/inv/detail/<%= inv_id %>" class="btn btn-secondary">Back to Vehicle</a>
+</div>
+
+<%- include('../layouts/footer') %>

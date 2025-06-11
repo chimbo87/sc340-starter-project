@@ -17,6 +17,7 @@ async function buildRegister(req, res, next) {
       account_firstname: '',
       account_lastname: '',
       account_email: '',
+      redirect: req.query.redirect || '', 
       messages: req.flash()
     });
   } catch (error) {
@@ -35,6 +36,7 @@ async function buildLogin(req, res, next) {
       nav,
       errors: null,
       account_email: '',
+      redirect: req.query.redirect || '', 
       messages: req.flash()
     });
   } catch (error) {
@@ -136,6 +138,7 @@ async function accountLogin(req, res) {
   try {
     let nav = await utilities.getNav();
     const { account_email, account_password } = req.body;
+    const redirectUrl = req.query.redirect || '/account/'; // Get redirect URL from query params
     
     const accountData = await accountModel.getAccountByEmail(account_email);
     if (!accountData) {
@@ -151,7 +154,6 @@ async function accountLogin(req, res) {
     
     const passwordMatch = await bcrypt.compare(account_password, accountData.account_password);
     if (passwordMatch) {
-  
       const accountDataForToken = {
         account_id: accountData.account_id,
         account_firstname: accountData.account_firstname,
@@ -160,22 +162,20 @@ async function accountLogin(req, res) {
         account_type: accountData.account_type
       };
       
-      // Sign token with correct secret
       const accessToken = jwt.sign(
         accountDataForToken, 
         process.env.ACCESS_TOKEN_SECRET || process.env.JWT_SECRET, 
         { expiresIn: 3600 * 1000 }
       );
       
-      // Set cookie
       res.cookie("jwt", accessToken, { 
         httpOnly: true, 
         maxAge: 3600 * 1000,
         secure: process.env.NODE_ENV === 'production'
       });
       
-      // Redirect to account management
-      return res.redirect("/account/");
+      // Redirect to the URL specified in the redirect parameter, or to account management if none
+      return res.redirect(redirectUrl);
     } else {
       req.flash("notice", "Please check your credentials and try again.");
       return res.status(400).render("account/login", {

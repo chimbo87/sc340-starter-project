@@ -5,6 +5,7 @@
 const baseController = require("./controllers/baseController");
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
+const reviewRoute = require('./routes/reviewRoute');
 const env = require("dotenv").config();
 const app = express();
 const static = require("./routes/static");
@@ -74,6 +75,9 @@ app.use("/account", accountRoute);
 
 // Inventory routes
 app.use("/inv", inventoryRoute);
+
+// Reviews routes
+app.use('/reviews', reviewRoute);
 
 // Static routes
 app.use(static);

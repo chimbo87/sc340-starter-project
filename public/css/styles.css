@@ -1459,3 +1459,947 @@ h1 {
   margin-top: 2rem;
   text-align: center;
 }
+
+
+
+.reviews-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.average-rating {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 1.3rem;
+}
+
+.review-item {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.review-rating {
+  color: #ffc107;
+}
+
+.review-date {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.review-text {
+  line-height: 1.5;
+}
+
+.no-reviews {
+  color: #6c757d;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+
+
+
+
+/* Login Form Styles - Scoped to avoid global conflicts */
+
+.login-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-container * {
+  box-sizing: border-box;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login-form h1 {
+  text-align: center;
+  color: #333;
+  margin: 0 0 30px 0;
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+}
+
+.login-form .alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  border: none;
+}
+
+.login-form .alert-info {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  border-left: 4px solid #2196f3;
+}
+
+.login-form .form-group {
+  margin-bottom: 24px;
+}
+
+.login-form .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.login-form .form-control {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  outline: none;
+}
+
+.login-form .form-control:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.login-form .form-control:hover {
+  border-color: #c4c9d0;
+}
+
+.login-form .btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 24px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  outline: none;
+}
+
+.login-form .btn-primary {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.login-form .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.login-form .btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.login-form .form-footer {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e1e5e9;
+}
+
+.login-form .form-footer p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.login-form .form-footer a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.login-form .form-footer a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 15px;
+  }
+  
+  .login-form {
+    padding: 25px 20px;
+  }
+  
+  .login-form h1 {
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+  }
+  
+  .login-form .form-control {
+    padding: 12px 14px;
+    font-size: 16px; /* Prevents iOS zoom */
+  }
+  
+  .login-form .btn-primary {
+    padding: 12px 20px;
+  }
+}
+
+/* Focus styles for accessibility */
+.login-form .btn:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+.login-form .form-control:focus-visible {
+  outline: none; /* We're using border and box-shadow instead */
+}
+
+/* Loading state (optional - add 'loading' class to button) */
+.login-form .btn.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.login-form .btn.loading::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+/* Account Update Styles - Scoped to avoid global conflicts */
+
+.account-update {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
+
+.account-update * {
+  box-sizing: border-box;
+}
+
+.account-update h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin: 0 0 40px 0;
+  font-size: 2.5rem;
+  font-weight: 300;
+  letter-spacing: -1px;
+}
+
+.account-update .alert {
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  font-size: 15px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.account-update .alert-info {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  color: #1565c0;
+  border-left: 5px solid #2196f3;
+}
+
+.account-update .errors {
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  border: 1px solid #ef5350;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  list-style: none;
+  box-shadow: 0 4px 12px rgba(239, 83, 80, 0.1);
+}
+
+.account-update .errors li {
+  color: #c62828;
+  margin-bottom: 8px;
+  font-size: 14px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.account-update .errors li:before {
+  content: '⚠';
+  position: absolute;
+  left: 0;
+  color: #ef5350;
+  font-weight: bold;
+}
+
+.account-update .errors li:last-child {
+  margin-bottom: 0;
+}
+
+.account-update .account-form,
+.account-update .password-form {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 35px;
+  margin-bottom: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.account-update .account-form h2,
+.account-update .password-form h2 {
+  color: #34495e;
+  margin: 0 0 25px 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.account-update .form-group {
+  margin-bottom: 25px;
+}
+
+.account-update .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.account-update .form-group input[type="text"],
+.account-update .form-group input[type="email"],
+.account-update .form-group input[type="password"] {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid #e1e8ed;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  outline: none;
+}
+
+.account-update .form-group input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+  transform: translateY(-1px);
+}
+
+.account-update .form-group input:hover {
+  border-color: #bdc3c7;
+}
+
+.account-update .form-group small {
+  display: block;
+  margin-top: 8px;
+  color: #7f8c8d;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 3px solid #3498db;
+}
+
+.account-update .btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px 32px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  outline: none;
+  width: 100%;
+}
+
+.account-update .btn-primary {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+}
+
+.account-update .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4);
+}
+
+.account-update .btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+}
+
+.account-update .password-form .btn-primary {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+}
+
+.account-update .password-form .btn-primary:hover {
+  box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+}
+
+.account-update .password-form .btn-primary:active {
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .account-update {
+    padding: 20px 15px;
+  }
+  
+  .account-update h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .account-update .account-form,
+  .account-update .password-form {
+    padding: 25px 20px;
+    margin-bottom: 20px;
+  }
+  
+  .account-update .form-group input {
+    padding: 14px 16px;
+    font-size: 16px; /* Prevents iOS zoom */
+  }
+  
+  .account-update .btn {
+    padding: 14px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .account-update {
+    padding: 15px 10px;
+  }
+  
+  .account-update h1 {
+    font-size: 1.8rem;
+  }
+  
+  .account-update .account-form,
+  .account-update .password-form {
+    padding: 20px 15px;
+  }
+  
+  .account-update .form-group {
+    margin-bottom: 20px;
+  }
+}
+
+/* Focus styles for accessibility */
+.account-update .btn:focus-visible {
+  outline: 3px solid rgba(52, 152, 219, 0.5);
+  outline-offset: 2px;
+}
+
+.account-update .form-group input:focus-visible {
+  outline: none; /* We're using border and box-shadow instead */
+}
+
+/* Loading state (optional - add 'loading' class to button) */
+.account-update .btn.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.account-update .btn.loading::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  margin-left: 12px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Form validation states */
+.account-update .form-group input:invalid {
+  border-color: #e74c3c;
+}
+
+.account-update .form-group input:valid {
+  border-color: #27ae60;
+}
+
+/* Enhanced visual separation between forms */
+.account-update .password-form {
+  border-top: 3px solid #e74c3c;
+}
+
+.account-update .account-form {
+  border-top: 3px solid #3498db;
+}
+
+
+/* Register Form Styles - Scoped to avoid global conflicts */
+
+.register-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.register-container * {
+  box-sizing: border-box;
+}
+
+.register-form {
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.register-form h1 {
+  text-align: center;
+  color: #333;
+  margin: 0 0 30px 0;
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+}
+
+.register-form .alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  border: none;
+}
+
+.register-form .alert-info {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  border-left: 4px solid #2196f3;
+}
+
+.register-form .form-group {
+  margin-bottom: 24px;
+}
+
+.register-form .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.register-form .form-control {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  outline: none;
+}
+
+.register-form .form-control:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.register-form .form-control:hover {
+  border-color: #c4c9d0;
+}
+
+.register-form .form-text {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border-left: 3px solid #667eea;
+}
+
+.register-form .text-muted {
+  color: #6c757d;
+  background-color: #f8f9fa;
+}
+
+.register-form .btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 24px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  outline: none;
+}
+
+.register-form .btn-primary {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.register-form .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.register-form .btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.register-form .form-footer {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e1e5e9;
+}
+
+.register-form .form-footer p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.register-form .form-footer a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.register-form .form-footer a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+/* Form field validation states */
+.register-form .form-control:invalid:not(:placeholder-shown) {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+.register-form .form-control:valid:not(:placeholder-shown) {
+  border-color: #28a745;
+  background-color: #f8fff8;
+}
+
+.register-form .form-control:invalid:not(:placeholder-shown):focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.register-form .form-control:valid:not(:placeholder-shown):focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+/* Enhanced password field styling */
+.register-form .form-group:has(input[type="password"]) {
+  position: relative;
+}
+
+.register-form .form-group:has(input[type="password"]) .form-text {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-left-color: #ffc107;
+  position: relative;
+}
+
+.register-form .form-group:has(input[type="password"]) .form-text::before {
+  content: "ℹ️";
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .register-container {
+    padding: 15px;
+  }
+  
+  .register-form {
+    padding: 25px 20px;
+    max-width: 100%;
+  }
+  
+  .register-form h1 {
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+  }
+  
+  .register-form .form-control {
+    padding: 12px 14px;
+    font-size: 16px; /* Prevents iOS zoom */
+  }
+  
+  .register-form .btn-primary {
+    padding: 12px 20px;
+  }
+  
+  .register-form .form-group {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .register-form {
+    padding: 20px 15px;
+  }
+  
+  .register-form h1 {
+    font-size: 1.4rem;
+  }
+}
+
+/* Focus styles for accessibility */
+.register-form .btn:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+.register-form .form-control:focus-visible {
+  outline: none; /* We're using border and box-shadow instead */
+}
+
+/* Loading state (optional - add 'loading' class to button) */
+.register-form .btn.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.register-form .btn.loading::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Progressive enhancement for form validation */
+.register-form .form-group:has(input:required) label::after {
+  content: " *";
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Smooth animations */
+.register-form .form-group {
+  animation: slideInUp 0.3s ease-out;
+}
+
+.register-form .form-group:nth-child(1) { animation-delay: 0.1s; }
+.register-form .form-group:nth-child(2) { animation-delay: 0.2s; }
+.register-form .form-group:nth-child(3) { animation-delay: 0.3s; }
+.register-form .form-group:nth-child(4) { animation-delay: 0.4s; }
+.register-form .form-group:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Vehicle Review Form - Scoped Styles */
+.vehicle-review-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.vehicle-review-title {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.vehicle-review-notice {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  text-align: center;
+}
+
+.vehicle-review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.vehicle-review-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vehicle-review-label {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1rem;
+}
+
+.vehicle-review-select,
+.vehicle-review-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.vehicle-review-select {
+  height: 40px;
+}
+
+.vehicle-review-textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.vehicle-review-select:focus,
+.vehicle-review-textarea:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.vehicle-review-button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.vehicle-review-submit-btn,
+.vehicle-review-cancel-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+}
+
+.vehicle-review-submit-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+}
+
+.vehicle-review-submit-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+}
+
+.vehicle-review-cancel-btn {
+  background-color: #95a5a6;
+  color: white;
+  border: none;
+}
+
+.vehicle-review-cancel-btn:hover {
+  background-color: #7f8c8d;
+  transform: translateY(-1px);
+}
